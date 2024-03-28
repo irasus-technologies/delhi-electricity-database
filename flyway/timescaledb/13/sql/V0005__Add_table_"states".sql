@@ -1,4 +1,4 @@
-CREATE TABLE public.discoms
+CREATE TABLE public.states
 (
     "timestamp" timestamp without time zone NOT NULL,
     "unitNumber" smallint NOT NULL,
@@ -9,6 +9,3 @@ CREATE TABLE public.discoms
 WITH (
     OIDS = FALSE
 );
-
-ALTER TABLE public.discoms
-    OWNER to postgres;

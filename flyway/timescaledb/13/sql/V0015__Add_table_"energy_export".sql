@@ -9,6 +9,3 @@ CREATE TABLE public.energy_export
 WITH (
     OIDS = FALSE
 );
-
-ALTER TABLE public.energy_export
-    OWNER to postgres;

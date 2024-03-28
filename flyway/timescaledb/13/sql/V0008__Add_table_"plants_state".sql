@@ -9,6 +9,3 @@ CREATE TABLE public.plants_state
 WITH (
     OIDS = FALSE
 );
-
-ALTER TABLE public.plants_state
-    OWNER to postgres;

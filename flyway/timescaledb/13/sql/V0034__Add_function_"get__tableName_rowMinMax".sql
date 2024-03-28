@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION public."get__tableName_rowMinMax()
+CREATE OR REPLACE FUNCTION public."get__tableName_rowMinMax"()
 RETURNS text[]
 LANGUAGE PLPGSQL
 AS $$

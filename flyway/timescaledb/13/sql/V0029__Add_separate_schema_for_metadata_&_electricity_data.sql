@@ -1,0 +1,3 @@
+CREATE SCHEMA metadata;
+
+CREATE SCHEMA edata;

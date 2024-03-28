@@ -8,9 +8,6 @@ WITH (
 );
 
 ALTER TABLE public.version_schema
-    OWNER to postgres;
-
-ALTER TABLE public.version_schema
     ALTER COLUMN "updatedAt" SET DEFAULT NOW();
 
 INSERT INTO public.version_schema(

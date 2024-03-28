@@ -1,0 +1,98 @@
+x-logging: &logging
+
+    logging:
+
+            driver: local
+
+            options:
+                max-size: "20m"
+                max-file: "5"
+                compress: "true"
+
+version: "3.9"
+
+networks:
+
+    khyber:
+
+        external: false
+
+        driver: bridge
+
+volumes:
+
+    timescaledb:
+
+        external: false
+
+services:
+
+    timescaledb:
+
+        <<: *logging
+
+        restart: unless-stopped
+
+        networks:
+            - khyber
+
+        # ports:
+            # - "${POSTGRESQL_PORTNUMBER:-5432}:5432"
+
+        container_name: timescaledb
+
+        volumes:
+            - "timescaledb:${PGDATA}"
+            - "./data/timescaledb/${FLYWAY_TIMESCALEDB_MINOR_VERSION}:/goodenough_0"
+
+        # build:
+        #     context: ./timescaledb
+        #     args:
+        #         - POSTGRES_VERSION=${POSTGRES_VERSION}
+        #         - TIMESCALEDB_VERSION=${TIMESCALEDB_VERSION}
+
+        # image: timescale/timescaledb:${TIMESCALEDB_VERSION}
+        image: irasus/timescaledb:${IRASUS_TIMESCALEDB_VERSION}
+
+        environment:
+            - POSTGRES_DB=${DATABASE_SERVER_DATABASENAME}
+            - POSTGRES_USER=${DATABASE_SERVER_USERNAME}
+            - POSTGRES_PASSWORD=${DATABASE_SERVER_PASSWORD}
+            - TZ=${TZ}
+            - PGDATA=${PGDATA}
+            - POSTGRES_REPLICA_USER_NAME=${POSTGRES_REPLICA_USER_NAME}
+            - POSTGRES_REPLICA_PASSWORD=${POSTGRES_REPLICA_PASSWORD}
+            - POSTGRES_REPLICA_DESTINATION=timescaledb_1
+            - POSTGRES_REPLICA_NAME=replica1
+            - POSTGRES_REPLICA_COMMIT_SYNCHRONOUS=off
+            - POSTGRESQL_PORTNUMBER=${POSTGRESQL_PORTNUMBER:-5432}
+            - TS_TUNE_MAX_CONNS=200
+            - TIMESCALEDB_TELEMETRY=off
+
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U ${DATABASE_SERVER_USERNAME} -d ${DATABASE_SERVER_DATABASENAME}"]
+            interval: 5s
+            timeout: 5s
+            retries: 5
+
+    flyway_timescaledb:
+
+        <<: *logging
+
+        restart: on-failure
+
+        networks:
+            - khyber
+
+        container_name: flyway_timescaledb
+
+        command: migrate
+
+        volumes:
+            - "./flyway/timescaledb/${FLYWAY_TIMESCALEDB_MINOR_VERSION}/sql:/flyway/sql"
+            - "./flyway/timescaledb/${FLYWAY_TIMESCALEDB_MINOR_VERSION}/conf:/flyway/conf"
+
+        image: flyway/flyway:${FLYWAY_TIMESCALEDB_MAJOR_VERSION}-alpine
+
+        depends_on:
+            - timescaledb

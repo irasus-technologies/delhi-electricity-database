@@ -1,1 +1,4 @@
 R__*.sql
+
+flyway/timescaledb/13/conf/flyway.conf
+.env

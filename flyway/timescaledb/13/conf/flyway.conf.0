@@ -1,0 +1,4 @@
+flyway.url=jdbc:postgresql://timescaledb:5432/DATABASE_NAME
+flyway.user=USER_NAME
+flyway.password=PASSWORD
+flyway.baselineOnMigrate=true

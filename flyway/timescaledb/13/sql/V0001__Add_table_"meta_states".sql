@@ -7,6 +7,3 @@ CREATE TABLE public.meta_states
 WITH (
     OIDS = FALSE
 );
-
-ALTER TABLE public.meta_states
-    OWNER to postgres;

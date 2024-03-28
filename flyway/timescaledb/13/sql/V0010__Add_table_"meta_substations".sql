@@ -7,6 +7,3 @@ CREATE TABLE public.meta_substations
 WITH (
     OIDS = FALSE
 );
-
-ALTER TABLE public.meta_substations
-    OWNER to postgres;

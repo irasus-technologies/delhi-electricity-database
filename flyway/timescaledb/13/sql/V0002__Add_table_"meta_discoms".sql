@@ -7,6 +7,3 @@ CREATE TABLE public.meta_discoms
 WITH (
     OIDS = FALSE
 );
-
-ALTER TABLE public.meta_discoms
-    OWNER to postgres;

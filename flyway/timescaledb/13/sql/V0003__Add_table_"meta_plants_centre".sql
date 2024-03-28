@@ -13,6 +13,3 @@ CREATE TABLE public.meta_plants_centre
 WITH (
     OIDS = FALSE
 );
-
-ALTER TABLE public.meta_plants_centre
-    OWNER to postgres;

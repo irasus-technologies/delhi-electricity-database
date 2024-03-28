@@ -1,4 +1,4 @@
-CREATE TABLE public.substations
+CREATE TABLE public.plants_centre
 (
     "timestamp" timestamp without time zone NOT NULL,
     "unitNumber" smallint NOT NULL,
@@ -9,6 +9,3 @@ CREATE TABLE public.substations
 WITH (
     OIDS = FALSE
 );
-
-ALTER TABLE public.substations
-    OWNER to postgres;

@@ -7,6 +7,3 @@ CREATE TABLE public.meta_energy_export
 WITH (
     OIDS = FALSE
 );
-
-ALTER TABLE public.meta_energy_export
-    OWNER to postgres;

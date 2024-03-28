@@ -1,4 +1,4 @@
-CREATE TABLE public.energy_import
+CREATE TABLE public.substations
 (
     "timestamp" timestamp without time zone NOT NULL,
     "unitNumber" smallint NOT NULL,
@@ -9,6 +9,3 @@ CREATE TABLE public.energy_import
 WITH (
     OIDS = FALSE
 );
-
-ALTER TABLE public.energy_import
-    OWNER to postgres;
